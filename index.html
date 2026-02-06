@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stockerr</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <h1 style="display:flex; align-items:center; gap:10px;">
+            <img src="./images/logo.png" alt="logo-image" style="width:30px;height:30px;border-radius:50%;"></img>
+            Stockerr
+        </h1>
+    </header>
+
+    <section>
+        <div style="padding:10px;">
+            <h1 style="font-size:3rem;font-weight:bolder;">Welcome to Stockerr.</h1>
+            <span>This is the best place to analyze trending market at <span
+                    style="font-weight:900;color:rgb(27, 27, 27);font-size:20px;">REAL TIME.</span></span>
+        </div>
+    </section>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:30px;background:rgb(88, 88, 88)">
+        <span style="color:white;font-weight:bold;font-size:17px;">Select the company</span>
+        <select id="stockSelect" style="border-radius:10px">
+            <option value="AAPL">Apple (AAPL)</option>
+            <option value="GOOGL">Google (GOOGL)</option>
+            <option value="MSFT">Microsoft (MSFT)</option>
+        </select>
+    </div>
+
+
+    <div class="dashboard">
+        <div class="card">
+            <h2>Stock Price</h2>
+            <canvas id="priceChart"></canvas>
+        </div>
+
+        <div class="card">
+            <h2>Trading Volume</h2>
+            <canvas id="volumeChart"></canvas>
+        </div>
+    </div>
+
+    <footer>
+        <div style="display:flex;margin-top:50px;padding:10px;flex-wrap:wrap;gap:20px;">
+            <div style="flex:1;padding-right:10px;min-width:150px;">
+                <span style="display:block;margin-bottom:10px;font-weight:bold;">Stockerr</span>
+                <span style="font-size:medium">sector 23, Nigdi Pradhikaran Pune. 411044</span>
+                <span style="display:block">+0123456789</span>
+            </div>
+            <div style="flex:1;min-width:100px;">
+                <span style="margin-bottom:7px;display:block;font-weight:bold;">Quick Links</span>
+                <a href="/index.html" style="text-decoration:none;color:black">Home</a>
+            </div>
+            <div style="flex:1;min-width:100px;">
+                <a><img src="" style="background:red;width:30px;height:30px;border-radius:50%" /></a></li>
+                <a><img src="" style="background:red;width:30px;height:30px;border-radius:50%" /></a></li>
+                <a><img src="" style="background:red;width:30px;height:30px;border-radius:50%" /></a></li>
+            </div>
+        </div>
+    </footer>
+    <div style="display:flex;height:200px;align-items:center;justify-content:center;
+    background:linear-gradient(to bottom,rgb(247, 247, 247),rgb(66, 66, 66),rgb(0, 0, 0));">
+        <span style="font-size:5em;font-weight:bold;color:rgb(122, 122, 122)">STOCKERR</span>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
