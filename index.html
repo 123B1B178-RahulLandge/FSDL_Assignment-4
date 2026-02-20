@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>StockVision Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+        <aside class="sidebar" id="sidebar">
+            <nav>
+                <button class="menu-btn" id="menuToggle" onclick="toggleSidebar()">❮</button>
+
+                <button class="nav-item active" onclick="showSection('dashboard')">
+                    <span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M11 6C10.7167 6 10.4793 5.904 10.288 5.712C10.0967 5.52 10.0007 5.28267 10 5V1C10 0.716667 10.096 0.479333 10.288 0.288C10.48 0.0966668 10.7173 0.000666667 11 0H17C17.2833 0 17.521 0.0960001 17.713 0.288C17.905 0.48 18.0007 0.717333 18 1V5C18 5.28333 17.904 5.521 17.712 5.713C17.52 5.905 17.2827 6.00067 17 6H11ZM1 10C0.716667 10 0.479333 9.904 0.288 9.712C0.0966668 9.52 0.000666667 9.28267 0 9V1C0 0.716667 0.0960001 0.479333 0.288 0.288C0.48 0.0966668 0.717333 0.000666667 1 0H7C7.28333 0 7.521 0.0960001 7.713 0.288C7.905 0.48 8.00067 0.717333 8 1V9C8 9.28333 7.904 9.521 7.712 9.713C7.52 9.905 7.28267 10.0007 7 10H1ZM11 18C10.7167 18 10.4793 17.904 10.288 17.712C10.0967 17.52 10.0007 17.2827 10 17V9C10 8.71667 10.096 8.47933 10.288 8.288C10.48 8.09667 10.7173 8.00067 11 8H17C17.2833 8 17.521 8.096 17.713 8.288C17.905 8.48 18.0007 8.71733 18 9V17C18 17.2833 17.904 17.521 17.712 17.713C17.52 17.905 17.2827 18.0007 17 18H11ZM1 18C0.716667 18 0.479333 17.904 0.288 17.712C0.0966668 17.52 0.000666667 17.2827 0 17V13C0 12.7167 0.0960001 12.4793 0.288 12.288C0.48 12.0967 0.717333 12.0007 1 12H7C7.28333 12 7.521 12.096 7.713 12.288C7.905 12.48 8.00067 12.7173 8 13V17C8 17.2833 7.904 17.521 7.712 17.713C7.52 17.905 7.28267 18.0007 7 18H1Z"
+                                fill="black" />
+                        </svg>
+                    </span>
+                    <span class="label">Dashboard</span>
+                </button>
+
+                <button class="nav-item" onclick="showSection('market', event)">
+                    <span class="icon"><svg width="20" height="22" viewBox="0 0 20 22" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 9H5V16H1V9ZM8 6H12V19H8V6Z" fill="black" stroke="black" stroke-width="2"
+                                stroke-linejoin="round" />
+                            <path d="M10 21V19" stroke="black" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M15 5H19V9.5H15V5Z" fill="black" stroke="black" stroke-width="2"
+                                stroke-linejoin="round" />
+                            <path d="M3 9V4M17 16V9.5M17 5V1" stroke="black" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <span class="label">Market</span>
+                </button>
+
+                <button class="nav-item" onclick="showSection('about')">
+                    <span class="icon"><svg width="20" height="22" viewBox="0 0 14 14" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M6.66666 0C10.3486 0 13.3333 2.98475 13.3333 6.66666C13.3333 10.3485 10.3486 13.3333 6.66666 13.3333C2.98478 13.3333 0 10.3486 0 6.66666C0 2.98475 2.98478 0 6.66666 0ZM7.33478 6H6.00147V10H7.33478V6ZM6.67344 3.16666C6.18738 3.16666 5.83478 3.51728 5.83478 3.99075C5.83478 4.48338 6.17809 4.83334 6.67344 4.83334C7.14953 4.83334 7.50147 4.48334 7.50147 4C7.50147 3.51731 7.14953 3.16666 6.67344 3.16666Z"
+                                fill="black" />
+                        </svg>
+                    </span>
+                    <span class="label">About</span>
+                </button>
+            </nav>
+        </aside>
+
+        <div class="main">
+            <header class="topbar">
+
+                <div class="logo">
+                    <span>StockVision</span>
+                </div>
+
+                <div class="search-area">
+                    <select id="symbolSelect"></select>
+                    <button onclick="fetchStock()">Load</button>
+                </div>
+
+                <div class="date-time" id="currentDate"></div>
+
+            </header>
+
+            <section id="dashboard" class="section active">
+
+                <div class="summary" id="stats"></div>
+
+                <div class="grid">
+
+                    <div class="card large">
+                        <h3>Price Trend</h3>
+                        <canvas id="priceChart"></canvas>
+                    </div>
+
+                    <div class="card">
+                        <h3>Volume</h3>
+                        <canvas id="volumeChart"></canvas>
+                    </div>
+
+                    <div class="card">
+                        <h3>Price Change %</h3>
+                        <canvas id="changeChart"></canvas>
+                    </div>
+
+                    <div class="card">
+                        <h3>Volume Trend (Line)</h3>
+                        <canvas id="volumeLineChart"></canvas>
+                    </div>
+
+                    <div class="card">
+                        <h3>Price Distribution</h3>
+                        <canvas id="distributionChart"></canvas>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section id="market" class="section">
+                <h2>Market Overview</h2>
+
+                <div class="summary market-summary">
+
+                    <div class="summary-card">
+                        <h4>Index</h4>
+                        <div class="value" id="sp500Value">S&P 500</div>
+                    </div>
+
+                    <div class="summary-card">
+                        <h4>Index</h4>
+                        <div class="value" id="nasdaqValue">NASDAQ</div>
+                    </div>
+
+                    <div class="summary-card">
+                        <h4>Index</h4>
+                        <div class="value" id="dowValue">DOW JONES</div>
+                    </div>
+
+                    <div class="summary-card">
+                        <h4>Index</h4>
+                        <div class="value" id="vixValue">VIX (Volatility)</div>
+                    </div>
+
+                </div>
+
+                <div class="grid">
+
+                    <div class="card">
+                        <h3>Sector Performance</h3>
+                        <canvas id="sectorChart"></canvas>
+                    </div>
+
+                    <div class="card">
+                        <h3>Market Sentiment</h3>
+                        <canvas id="sentimentChart"></canvas>
+                    </div>
+
+                    <div class="card large">
+                        <h3>Volatility Trend (Last 30 Days)</h3>
+                        <canvas id="volatilityChart"></canvas>
+                    </div>
+
+                </div>
+
+                <div class="card" style="margin-top:20px;">
+                    <h3>Top Gainers & Losers</h3>
+
+                    <table class="market-table">
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Change %</th>
+                            </tr>
+                        </thead>
+                        <tbody id="gainersTable"></tbody>
+                    </table>
+                </div>
+
+            </section>
+
+
+            <section id="about" class="section">
+
+                <div class="about-container">
+
+                    <h2>About StockVision</h2>
+
+                    <p class="about-intro">
+                        StockVision is a modern financial analytics dashboard designed to help users
+                        visualize, analyze, and understand stock market trends through interactive charts
+                        and structured market insights.
+                    </p>
+
+                    <div class="about-grid">
+
+                        <div class="about-card">
+                            <h4>Data Visualization</h4>
+                            <p>
+                                Interactive charts for price trends, trading volume, price distribution,
+                                and percentage changes to simplify complex market data.
+                            </p>
+                        </div>
+
+                        <div class="about-card">
+                            <h4>Market Insights</h4>
+                            <p>
+                                Market overview including major indices, volatility indicators,
+                                and top gainers & losers for quick decision-making.
+                            </p>
+                        </div>
+
+                        <div class="about-card">
+                            <h4>Performance Focused</h4>
+                            <p>
+                                Lightweight and responsive design built for smooth performance
+                                across desktop and mobile devices.
+                            </p>
+                        </div>
+
+                        <div class="about-card">
+                            <h4>Educational Purpose</h4>
+                            <p>
+                                Designed for learning, practice, and demonstration of financial
+                                data visualization concepts.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
